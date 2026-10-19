@@ -2,52 +2,107 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Catatan Keuangan Rumah Tangga</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
+  <header class="topbar">
+    <div class="wrap">
+      <h1>Catatan Keuangan Rumah</h1>
+      <p>Pantau pemasukan, pengeluaran, dan sisa uang belanja di tiap amplop.</p>
+    </div>
+  </header>
+
   <main class="wrap">
-    <section class="ringkasan">
+    <section class="ringkasan" aria-label="Ringkasan keuangan">
       <article class="kartu kartu-ringkas">
-        <h2>Total Pemasukan</h2> <p class="angka masuk" id="total-pemasukan">Rp 0</p>
+        <h2>Total Pemasukan</h2>
+        <p class="angka masuk" id="total-pemasukan">Rp 0</p>
       </article>
       <article class="kartu kartu-ringkas">
-        <h2>Total Pengeluaran</h2> <p class="angka keluar" id="total-pengeluaran">Rp 0</p>
+        <h2>Total Pengeluaran</h2>
+        <p class="angka keluar" id="total-pengeluaran">Rp 0</p>
       </article>
       <article class="kartu kartu-ringkas">
-        <h2>Saldo</h2> <p class="angka" id="total-saldo">Rp 0</p>
+        <h2>Saldo</h2>
+        <p class="angka" id="total-saldo">Rp 0</p>
       </article>
     </section>
 
-    <section class="kartu">
-      <h2>Tambah Transaksi</h2>
-      <form id="form-transaksi">
-        <div class="bidang">
-          <label>Tanggal</label> <input type="date" id="tanggal">
+    <section class="kartu" aria-labelledby="judul-amplop">
+      <div class="panel-kepala">
+        <h2 id="judul-amplop">Amplop Belanja</h2>
+        <div class="kontrol-amplop">
+          <label for="bulan-amplop">Bulan</label>
+          <input type="month" id="bulan-amplop">
+          <button type="button" class="tombol sekunder" id="tombol-atur-amplop">Atur Amplop</button>
         </div>
-        <div class="bidang">
-          <label>Jenis</label>
-          <select id="jenis"><option value="pengeluaran">Pengeluaran</option><option value="pemasukan">Pemasukan</option></select>
+      </div>
+
+      <form id="form-amplop" novalidate hidden>
+        <p class="petunjuk">Bagi uang belanja bulan ini ke amplop. Isi minimal 3 amplop dengan nominal lebih dari 0.</p>
+        <div class="isian-amplop" id="isian-amplop"></div>
+        <p class="error" id="error-amplop" role="alert"></p>
+        <div class="aksi">
+          <button type="submit" class="tombol utama">Simpan Pembagian</button>
+          <button type="button" class="tombol sekunder" id="tombol-batal-amplop">Batal</button>
         </div>
-        <div class="bidang">
-          <label>Kategori</label> <select id="kategori"></select>
-        </div>
-        <div class="bidang">
-          <label>Nominal (Rp)</label> <input type="number" id="nominal">
-        </div>
-        <div class="bidang">
-          <label>Catatan</label> <input type="text" id="catatan">
-        </div>
-        <p class="error" id="error-form"></p>
-        <button type="submit" class="tombol utama">Simpan Transaksi</button>
       </form>
+
+      <p class="kosong" id="info-amplop"></p>
+      <div class="grid-amplop" id="daftar-amplop"></div>
     </section>
 
-    <section class="kartu">
-      <h2>Riwayat Transaksi</h2>
-      <ul class="daftar" id="daftar-transaksi"></ul>
-    </section>
+    <div class="dua-kolom">
+      <section class="kartu" aria-labelledby="judul-form">
+        <h2 id="judul-form">Tambah Transaksi</h2>
+        <form id="form-transaksi" novalidate>
+          <div class="bidang">
+            <label for="tanggal">Tanggal</label>
+            <input type="date" id="tanggal" name="tanggal">
+            <p class="error" id="error-tanggal"></p>
+          </div>
+
+          <div class="bidang">
+            <label for="jenis">Jenis</label>
+            <select id="jenis" name="jenis">
+              <option value="pengeluaran">Pengeluaran</option>
+              <option value="pemasukan">Pemasukan</option>
+            </select>
+            <p class="error" id="error-jenis"></p>
+          </div>
+
+          <div class="bidang">
+            <label for="kategori">Kategori</label>
+            <select id="kategori" name="kategori"></select>
+            <p class="petunjuk" id="petunjuk-kategori"></p>
+            <p class="error" id="error-kategori"></p>
+          </div>
+
+          <div class="bidang">
+            <label for="nominal">Nominal (Rp)</label>
+            <input type="number" id="nominal" name="nominal" min="1" step="1" inputmode="numeric" placeholder="0">
+            <p class="error" id="error-nominal"></p>
+          </div>
+
+          <div class="bidang">
+            <label for="catatan">Catatan <span class="opsional">(opsional)</span></label>
+            <input type="text" id="catatan" name="catatan" maxlength="100" placeholder="Contoh: sayur dan lauk">
+          </div>
+
+          <p class="error" id="error-form" role="alert"></p>
+          <button type="submit" class="tombol utama penuh">Simpan Transaksi</button>
+        </form>
+      </section>
+
+      <section class="kartu" aria-labelledby="judul-daftar">
+        <h2 id="judul-daftar">Riwayat Transaksi</h2>
+        <p class="kosong" id="daftar-kosong">Belum ada transaksi. Catat transaksi pertama lewat form Tambah Transaksi.</p>
+        <ul class="daftar" id="daftar-transaksi"></ul>
+      </section>
+    </div>
   </main>
 </body>
 </html>
