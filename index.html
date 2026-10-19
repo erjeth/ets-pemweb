@@ -51,6 +51,7 @@
         </div>
       </form>
 
+      <ul class="peringatan" id="peringatan-amplop" aria-live="polite"></ul>
       <p class="kosong" id="info-amplop"></p>
       <div class="grid-amplop" id="daftar-amplop"></div>
     </section>
@@ -93,16 +94,64 @@
           </div>
 
           <p class="error" id="error-form" role="alert"></p>
-          <button type="submit" class="tombol utama penuh">Simpan Transaksi</button>
+          <p class="pesan waspada" id="peringatan-form" role="status"></p>
+          <div class="aksi aksi-form">
+            <button type="submit" class="tombol utama" id="tombol-simpan">Simpan Transaksi</button>
+            <button type="button" class="tombol sekunder" id="tombol-batal-edit" hidden>Batal Edit</button>
+          </div>
         </form>
       </section>
 
       <section class="kartu" aria-labelledby="judul-daftar">
         <h2 id="judul-daftar">Riwayat Transaksi</h2>
+
+        <form class="filter" id="form-filter" aria-label="Filter transaksi" novalidate hidden>
+          <div class="bidang">
+            <label for="filter-cari">Cari catatan</label>
+            <input type="search" id="filter-cari" placeholder="Kata kunci">
+          </div>
+          <div class="bidang">
+            <label for="filter-jenis">Jenis</label>
+            <select id="filter-jenis">
+              <option value="">Semua jenis</option>
+              <option value="pemasukan">Pemasukan</option>
+              <option value="pengeluaran">Pengeluaran</option>
+            </select>
+          </div>
+          <div class="bidang">
+            <label for="filter-kategori">Kategori</label>
+            <select id="filter-kategori"></select>
+          </div>
+          <div class="bidang">
+            <label for="filter-dari">Dari tanggal</label>
+            <input type="date" id="filter-dari">
+          </div>
+          <div class="bidang">
+            <label for="filter-sampai">Sampai tanggal</label>
+            <input type="date" id="filter-sampai">
+          </div>
+          <div class="filter-aksi">
+            <button type="button" class="tombol sekunder" id="tombol-reset-filter">Atur Ulang Filter</button>
+          </div>
+        </form>
+        <p class="error" id="error-filter" role="alert"></p>
+        <p class="info-filter" id="info-filter"></p>
+
         <p class="kosong" id="daftar-kosong">Belum ada transaksi. Catat transaksi pertama lewat form Tambah Transaksi.</p>
         <ul class="daftar" id="daftar-transaksi"></ul>
       </section>
     </div>
+
+    <section class="kartu" aria-labelledby="judul-backup">
+      <h2 id="judul-backup">Cadangan Data</h2>
+      <p class="petunjuk">Data hanya tersimpan di browser ini. Ekspor ke file JSON sebagai cadangan, lalu impor kembali bila data hilang atau dipindah ke perangkat lain.</p>
+      <div class="aksi aksi-backup">
+        <button type="button" class="tombol sekunder" id="tombol-ekspor">Ekspor JSON</button>
+        <button type="button" class="tombol sekunder" id="tombol-impor">Impor JSON</button>
+        <input type="file" id="berkas-impor" accept="application/json,.json" hidden>
+      </div>
+      <p class="pesan" id="pesan-backup" role="status"></p>
+    </section>
   </main>
 </body>
 </html>
