@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Catatan Keuangan Rumah Tangga</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="wrap">
+    <section class="kartu">
+      <h2>Tambah Transaksi</h2>
+      <form id="form-transaksi">
+        <div class="bidang">
+          <label>Tanggal</label> <input type="date" id="tanggal">
+        </div>
+        <div class="bidang">
+          <label>Jenis</label>
+          <select id="jenis"><option value="pengeluaran">Pengeluaran</option><option value="pemasukan">Pemasukan</option></select>
+        </div>
+        <div class="bidang">
+          <label>Kategori</label> <select id="kategori"></select>
+        </div>
+        <div class="bidang">
+          <label>Nominal (Rp)</label> <input type="number" id="nominal">
+        </div>
+        <div class="bidang">
+          <label>Catatan</label> <input type="text" id="catatan">
+        </div>
+        <button type="submit" class="tombol utama">Simpan Transaksi</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
