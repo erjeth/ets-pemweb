@@ -7,6 +7,13 @@ let transaksi = [];
 
 const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 });
 
+function hapusTransaksi(id) {
+  const yakin = confirm("Yakin ingin menghapus transaksi ini?");
+  if (yakin) {
+    transaksi = transaksi.filter(item => item.id !== id);
+    renderDaftar(); // Render ulang setelah dihapus
+  }
+}
 
 function isiKategori() {
   const jenis = document.getElementById("jenis").value;
@@ -32,6 +39,7 @@ function renderDaftar() {
         </div>
         <div class="item-kanan">
           <span class="item-nominal ${kelas}">${tanda}${formatter.format(item.nominal)}</span>
+          <button type="button" class="tombol kecil hapus" onclick="hapusTransaksi(${item.id})">Hapus</button>
         </div>
       </li>`;
   }).join("");
