@@ -1,6 +1,6 @@
 # AI-LOG.md
 
-Dokumen ini mencatat bantuan AI dalam proses pengembangan aplikasi. Kolom “penyesuaian mandiri” di bawah adalah **contoh ide penyesuaian yang bisa dicatat jika memang dilakukan**. Ganti dengan perubahan yang benar-benar dibuat sendiri; jangan menganggapnya sebagai riwayat faktual apabila belum dilakukan.
+Dokumen ini mencatat bantuan AI dalam proses pengembangan aplikasi
 
 ## Entri 1 — Perumusan fitur aplikasi keuangan
 
@@ -12,7 +12,7 @@ Dokumen ini mencatat bantuan AI dalam proses pengembangan aplikasi. Kolom “pen
 
 **Penyesuaian mandiri — isi sesuai kenyataan:**
 - Contoh yang dapat dipakai jika benar dilakukan: memilih fitur yang paling relevan untuk versi awal dan memprioritaskan alur utama berupa pencatatan transaksi, pembagian anggaran bulanan, dan pemantauan sisa amplop.
-- Perubahan nyata yang saya lakukan: _[tuliskan fitur atau keputusan yang benar-benar Anda pilih/ubah]_.
+- Perubahan nyata yang saya lakukan: Membuat fitur amplop yang dapat di tambahkan dan diatur sendiri.
 
 ## Entri 2 — Penyusunan tampilan CSS
 
@@ -25,7 +25,7 @@ Dokumen ini mencatat bantuan AI dalam proses pengembangan aplikasi. Kolom “pen
 
 **Penyesuaian mandiri — isi sesuai kenyataan:**
 - Contoh yang dapat dipakai jika benar dilakukan: menyesuaikan warna, jarak, ukuran teks, atau breakpoint setelah melihat hasilnya di browser; lalu melakukan hard refresh untuk memastikan stylesheet terbaru dimuat.
-- Perubahan nyata yang saya lakukan: _[tuliskan perubahan CSS yang benar-benar Anda buat, atau tulis “belum ada; CSS masih menggunakan hasil awal AI” jika sesuai]_.
+- Perubahan nyata yang saya lakukan: belum ada.
 
 ## Entri 3 — Dokumentasi repositori
 
@@ -37,4 +37,4 @@ Dokumen ini mencatat bantuan AI dalam proses pengembangan aplikasi. Kolom “pen
 
 **Penyesuaian mandiri — isi sesuai kenyataan:**
 - Contoh yang dapat dipakai jika benar dilakukan: membandingkan dokumentasi dengan kode terbaru, memperbaiki nama fungsi/kunci penyimpanan jika berbeda, dan mengganti simulasi dengan kendala yang benar-benar dialami.
-- Perubahan nyata yang saya lakukan: _[tuliskan koreksi, tambahan, atau pengujian yang benar-benar Anda lakukan]_.
+- Perubahan nyata yang saya lakukan: koreksi, dan penambahan.
