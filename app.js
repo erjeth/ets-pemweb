@@ -1,17 +1,23 @@
+const KUNCI_TRANSAKSI = "pmm_transaksi";
 const KATEGORI = {
   pemasukan: ["Uang Bulanan", "Usaha Sampingan", "Pemasukan Lain"],
   pengeluaran: ["Belanja Dapur", "Kebutuhan Anak", "Tagihan Rumah", "Transportasi", "Lainnya"]
 };
 
-let transaksi = []; 
+let transaksi = JSON.parse(localStorage.getItem(KUNCI_TRANSAKSI)) || []; 
 
 const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 });
+
+function simpanTransaksi() {
+  localStorage.setItem(KUNCI_TRANSAKSI, JSON.stringify(transaksi));
+}
 
 function hapusTransaksi(id) {
   const yakin = confirm("Yakin ingin menghapus transaksi ini?");
   if (yakin) {
     transaksi = transaksi.filter(item => item.id !== id);
-    renderDaftar(); // Render ulang setelah dihapus
+    simpanTransaksi();
+    renderDaftar();
   }
 }
 
@@ -58,9 +64,12 @@ document.getElementById("form-transaksi").addEventListener("submit", function(ev
   };
 
   transaksi.push(data);
+  simpanTransaksi();
   
   renderDaftar();
   
   document.getElementById("form-transaksi").reset(); 
   isiKategori();
 });
+
+renderDaftar();
