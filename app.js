@@ -76,24 +76,34 @@ window.hapusTransaksi = function(id) {
 };
 
 document.getElementById("form-transaksi").addEventListener("submit", function(event) {
-  event.preventDefault(); 
+  event.preventDefault();
+  
+  const tanggal = document.getElementById("tanggal").value;
+  const kategori = document.getElementById("kategori").value;
+  const nominal = Number(document.getElementById("nominal").value);
+  const elError = document.getElementById("error-form");
+
+  if (!tanggal || !kategori || nominal <= 0) {
+    elError.textContent = "Error: Semua field wajib diisi dan nominal harus lebih dari 0!";
+    return; 
+  }
+  
+  elError.textContent = ""; 
   
   const data = {
     id: Date.now(),
-    tanggal: document.getElementById("tanggal").value,
+    tanggal: tanggal,
     jenis: document.getElementById("jenis").value,
-    kategori: document.getElementById("kategori").value,
-    nominal: Number(document.getElementById("nominal").value), 
+    kategori: kategori,
+    nominal: nominal,
     catatan: document.getElementById("catatan").value
   };
 
-  transaksi.push(data); 
-  simpanTransaksi(); 
+  transaksi.push(data);
+  simpanTransaksi();
+  renderSemua();
   
-  renderSemua(); 
-  
-  document.getElementById("form-transaksi").reset(); 
-  isiKategori(); 
+  document.getElementById("form-transaksi").reset();
 });
 
 isiKategori(); 
