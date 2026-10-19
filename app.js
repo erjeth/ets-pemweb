@@ -1,24 +1,19 @@
-const KUNCI_TRANSAKSI = "pmm_transaksi";
 const KATEGORI = {
   pemasukan: ["Uang Bulanan", "Usaha Sampingan", "Pemasukan Lain"],
   pengeluaran: ["Belanja Dapur", "Kebutuhan Anak", "Tagihan Rumah", "Transportasi", "Lainnya"]
 };
 
-let transaksi = JSON.parse(localStorage.getItem(KUNCI_TRANSAKSI)) || []; 
+const KUNCI_TRANSAKSI = "pmm_transaksi";
+let transaksi = JSON.parse(localStorage.getItem(KUNCI_TRANSAKSI)) || [];
 
 const formatter = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 });
 
+const elTotalPemasukan = document.getElementById("total-pemasukan");
+const elTotalPengeluaran = document.getElementById("total-pengeluaran");
+const elTotalSaldo = document.getElementById("total-saldo");
+
 function simpanTransaksi() {
   localStorage.setItem(KUNCI_TRANSAKSI, JSON.stringify(transaksi));
-}
-
-function hapusTransaksi(id) {
-  const yakin = confirm("Yakin ingin menghapus transaksi ini?");
-  if (yakin) {
-    transaksi = transaksi.filter(item => item.id !== id);
-    simpanTransaksi();
-    renderDaftar();
-  }
 }
 
 function isiKategori() {
@@ -28,7 +23,22 @@ function isiKategori() {
 }
 
 document.getElementById("jenis").addEventListener("change", isiKategori);
-isiKategori(); 
+
+function renderRingkasan() {
+  const pemasukan = transaksi
+    .filter(item => item.jenis === "pemasukan")
+    .reduce((total, item) => total + item.nominal, 0);
+
+  const pengeluaran = transaksi
+    .filter(item => item.jenis === "pengeluaran")
+    .reduce((total, item) => total + item.nominal, 0);
+
+  const saldo = pemasukan - pengeluaran;
+
+  elTotalPemasukan.textContent = formatter.format(pemasukan);
+  elTotalPengeluaran.textContent = formatter.format(pengeluaran);
+  elTotalSaldo.textContent = formatter.format(saldo);
+}
 
 function renderDaftar() {
   const elDaftar = document.getElementById("daftar-transaksi");
@@ -51,6 +61,20 @@ function renderDaftar() {
   }).join("");
 }
 
+function renderSemua() {
+  renderRingkasan();
+  renderDaftar();
+}
+
+window.hapusTransaksi = function(id) {
+  const yakin = confirm("Yakin ingin menghapus transaksi ini?");
+  if (yakin) {
+    transaksi = transaksi.filter(item => item.id !== id);
+    simpanTransaksi();
+    renderSemua();    
+  }
+};
+
 document.getElementById("form-transaksi").addEventListener("submit", function(event) {
   event.preventDefault(); 
   
@@ -59,17 +83,18 @@ document.getElementById("form-transaksi").addEventListener("submit", function(ev
     tanggal: document.getElementById("tanggal").value,
     jenis: document.getElementById("jenis").value,
     kategori: document.getElementById("kategori").value,
-    nominal: Number(document.getElementById("nominal").value), // Pastikan jadi angka
+    nominal: Number(document.getElementById("nominal").value), 
     catatan: document.getElementById("catatan").value
   };
 
-  transaksi.push(data);
-  simpanTransaksi();
+  transaksi.push(data); 
+  simpanTransaksi(); 
   
-  renderDaftar();
+  renderSemua(); 
   
   document.getElementById("form-transaksi").reset(); 
-  isiKategori();
+  isiKategori(); 
 });
 
-renderDaftar();
+isiKategori(); 
+renderSemua();
